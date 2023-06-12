@@ -1,4 +1,4 @@
-import { useFilter } from "@/app/Hooks/useFilter";
+import { useFilter } from "@/Hooks/useFilter";
 import { FilterType } from "@/types/filter-typer";
 import { styled } from "styled-components"
 

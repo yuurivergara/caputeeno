@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import { ArrowIcon } from "./arrow-icon";
 import { useState } from "react";
-import { useFilter } from "@/app/Hooks/useFilter";
+import { useFilter } from "@/Hooks/useFilter";
 import { FilterContext } from "@/contexts/filter-context";
 import { PriorityTypes } from "@/types/priority-types";
 

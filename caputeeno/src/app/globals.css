@@ -1,10 +1,13 @@
 :root {
   --border-radius: 12px;
   --logo-color: #5D5D6D;
+  --bg-primary: #DEDEDE;
   --bg-secondary: #F3F5F6;
   --text-dark: #737380;
   --delete-color: #DE3838;
   --orange-low: #FFA585;
+  --card-text: #41414D;
+  --price-color: #09090A;
 }
 
 * {
