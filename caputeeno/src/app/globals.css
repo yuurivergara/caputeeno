@@ -1,9 +1,12 @@
 :root {
   --border-radius: 12px;
+<<<<<<< HEAD
   --logo-color: #5D5D6D;
   --bg-secondary: #F3F5F6;
   --text-dark: #737380;
   --delete-color: #DE3838
+=======
+>>>>>>> cc64fdd513d35749e68e3c15dbf4e2a777c3511b
 }
 
 * {
