@@ -1,33 +1,35 @@
-import { styled } from "styled-components";
-import { ArrowIcon } from "./arrow-icon";
-import { useState } from "react";
-import { useFilter } from "@/Hooks/useFilter";
-import { FilterContext } from "@/contexts/filter-context";
-import { PriorityTypes } from "@/types/priority-types";
+import { styled } from "styled-components"
+import { ArrowIcon } from "./icons/arrow-icon"
+import { useState } from "react"
+import { useFilter } from "@/hooks/useFilter"
+import { PriorityTypes } from "@/types/priority-types"
 
 const FilterContainer = styled.div`
     display: flex;
     align-items: center;
     position: relative;
 
-    button{
+    button {
+        border: none;
+        background: transparent;
+        cursor: pointer;
+
         font-family: inherit;
         font-weight: 400;
         font-size: 14px;
         line-height: 22px;
         color: var(--text-dark);
-        border: none;
-        cursor: pointer;
-        background: transparent;
+
         display: flex;
         align-items: center;
         justify-content: center;
 
-        svg{
+        svg {
             margin-left: 16px;
         }
     }
 `
+
 const PriorityFilter = styled.ul`
     position: absolute;
     width: 250px;
@@ -42,9 +44,8 @@ const PriorityFilter = styled.ul`
     top: 100%;
     right: 8px;
 
-    li{
+    li {
         color: var(--text-dark);
-        font-family: inherit;
         font-weight: 400;
         font-size: 14px;
         line-height: 22px;
@@ -55,33 +56,32 @@ const PriorityFilter = styled.ul`
         margin-top: 4px;
     }
 `
-export function FilterByPriority(){
-    const [isOpen, setIsOpen] = useState(false);
-    const { setPriority} =  useFilter();
 
-    const handleOpen = () => {
-        setIsOpen(prev => !prev)
-    }
+export function FilterByPriority(){
+    const [isOpen, setIsOpen] = useState(false)
+    const { setPriority } = useFilter()
+
+    const handleOpen = () => setIsOpen(prev => !prev)
 
     const handleUpdatePriority = (value: PriorityTypes) => {
-        setPriority(value);
-        setIsOpen(false);
+        setPriority(value)
+        setIsOpen(false)
     }
+
     return(
         <FilterContainer>
-            <button onClick={()=> handleOpen()}
-            >ORGANIZAR POR
-                <ArrowIcon />
+            <button onClick={handleOpen}>
+                Organizar por
+                <ArrowIcon/>
             </button>
             {isOpen && 
             <PriorityFilter>
-                <li onClick={()=> handleUpdatePriority(PriorityTypes.NEWS)}>Novidades</li>
-                <li onClick={()=> handleUpdatePriority(PriorityTypes.BIGGEST_PRICE)}>Preço: Maior - Menor</li>
-                <li onClick={()=> handleUpdatePriority(PriorityTypes.MINOR_PRICE)}>Preço: Menor - Maior</li>
-                <li onClick={()=> handleUpdatePriority(PriorityTypes.POPULARITY)}>Mais vendidos</li>
+                <li onClick={() => handleUpdatePriority(PriorityTypes.NEWS)}>Novidades</li>
+                <li onClick={() => handleUpdatePriority(PriorityTypes.BIGGEST_PRICE)}>Preço: Maior - menor</li>
+                <li onClick={() => handleUpdatePriority(PriorityTypes.MINOR_PRICE)}>Preço: Menor - maior</li>
+                <li onClick={() => handleUpdatePriority(PriorityTypes.POPULARITY)}>Mais vendidos</li>
             </PriorityFilter>
-            }
+        }
         </FilterContainer>
     )
-
 }

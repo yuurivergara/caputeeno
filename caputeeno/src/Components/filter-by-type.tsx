@@ -1,13 +1,11 @@
-import { useFilter } from "@/Hooks/useFilter";
-import { FilterType } from "@/types/filter-typer";
+"use client"
+
+import { useFilter } from "@/hooks/useFilter"
+import { FilterType } from "@/types/filter-typer"
 import { styled } from "styled-components"
 
-interface FilterBarProps{
-
-}
-
-interface FilterItemProps{
-    selected: boolean;
+interface FilterItemProps {
+    selected: boolean
 }
 
 const FilterList = styled.ul`
@@ -17,41 +15,53 @@ const FilterList = styled.ul`
     gap: 40px;
     list-style: none;
 `
+
 const FilterItem = styled.li<FilterItemProps>`
-    
-
     font-family: inherit;
-    font-weight: ${props => props.selected ? "600" : "400"};
-    font-size: 16px;
-    line-height: 22px;
-    cursor: pointer;
-
-    align-items: center;
+    font-weight: ${props => props.selected ? '600' : '400'};
+    font-size: 12px;
+    line-height: 18px;
     text-align: center;
     text-transform: uppercase;
-
+    cursor: pointer;
 
     color: var(--text-dark);
 
-    border-bottom: ${props => props.selected ? "4px solid var(--orange-low)": ""};
+    border-bottom: ${props => props.selected ? '4px solid var(--orange-low);' : ''};
+
+    @media(min-width: ${props => props.theme.desktopBreakpoint}){
+        font-size: 16px;
+        line-height: 22px;
+    }
 `
-export function FilterByType(props: FilterBarProps){
-    const {type, setType} = useFilter();
+
+export function FilterByType(){
+    const { type, setType } = useFilter();
 
     const handleChangeType = (value: FilterType) => {
-        setType(value);
+        setType(value)
     }
+
     return(
         <FilterList>
             <FilterItem 
-            selected={type === FilterType.ALL} 
-            onClick={()=> handleChangeType(FilterType.ALL)}>TODOS OS PRODUTOS</FilterItem>
+                selected={type === FilterType.ALL}
+                onClick={() => handleChangeType(FilterType.ALL)}
+            >
+                Todos os produtos
+            </FilterItem>
             <FilterItem 
-            selected={type === FilterType.SHIRT} 
-            onClick={()=>handleChangeType(FilterType.SHIRT)}>CAMISETAS</FilterItem>
+                selected={type === FilterType.SHIRT} 
+                onClick={() => handleChangeType(FilterType.SHIRT)}
+            >
+                Camisetas
+            </FilterItem>
             <FilterItem 
-            selected={type === FilterType.MUG} 
-            onClick={()=>handleChangeType(FilterType.MUG)}>CANECAS</FilterItem>
+                selected={type === FilterType.MUG} 
+                onClick={() => handleChangeType(FilterType.MUG)}
+            >
+                Canecas
+            </FilterItem>
         </FilterList>
     )
 }

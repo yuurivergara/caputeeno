@@ -1,72 +1,73 @@
+import { formatPrice } from "@/utils/format-price"
+import { useRouter } from "next/navigation"
 import { styled } from "styled-components"
+import { Divider } from "./divider"
 
-interface ProductProps{
+interface ProductCardProps {
     image: string,
     title: string,
-    price: number
+    price: number,
+    id: string
 }
-const Container = styled.div`
+
+const Card = styled.div`
     display: flex;
-    cursor: pointer;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    width: 256px;
+    cursor: pointer;
+
     background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(10px);
     border-radius: 0px 0px 4px 4px;
 
-    img{
+    width: 256px;
+
+    img {
         width: 256px;
         height: 300px;
     }
 
     h3 {
-        font-family: inherit;
         font-weight: 300;
         font-size: 16px;
         line-height: 150%;
-        color: var(--card-text);
+        color: var(--text-dark-2);
     }
-    p{  
-        font-family: inherit;
+
+    p {
         font-weight: 600;
         font-size: 14px;
         line-height: 150%;
-        color: var(--price-color);
+        color: var(--shapes-dark);
     }
 
-    div{
+    div {
         display: flex;
         align-items: start;
         justify-content: center;
         flex-direction: column;
-        padding: 8px 0;
-        > div {
-            width: 228px;
-            height: 1px;
-            padding: 0px;
-            margin: 8px 0;
-            background: #DCE2E6;
-        }
+        padding: 8px 12px;
+        width: 100%;
     }
 `
 
-export function ProductCard(props : ProductProps){
-    function formatValue(valueInCents: number){
-        const valueInReal = valueInCents/100;
-        return valueInReal.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})
+export function ProductCard(props : ProductCardProps){
+    const router = useRouter();
+    const price = formatPrice(props.price)
+
+    const handleNavigate = () => {
+        router.push("/product?id=" + props.id);
     }
 
-    const price = formatValue(props.price)
     return(
-        <Container>
-            <img src={props.image} />
+        <Card onClick={handleNavigate}>
+            <img src={props.image}/>
             <div>
                 <h3>{props.title}</h3>
-                <div/>
+                <Divider/>
                 <p>{price}</p>
             </div>
-        </Container>
+        </Card>
     )
 }

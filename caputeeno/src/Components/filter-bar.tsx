@@ -1,8 +1,10 @@
+"use client"
+
 import { styled } from "styled-components";
 import { FilterByType } from "./filter-by-type";
 import { FilterByPriority } from "./filter-by-priority";
 
-interface FilterBarProps{
+interface FilterBarProps {
 
 }
 
@@ -13,12 +15,11 @@ const FilterContainer = styled.div`
     justify-content: space-between;
 `
 
-export function FilterBar(props: FilterBarProps){
+export function FilterBar(props : FilterBarProps){
     return(
         <FilterContainer>
-            <FilterByType />
-            <FilterByPriority />
+            <FilterByType/>
+            <FilterByPriority/>
         </FilterContainer>
-        
     )
 }

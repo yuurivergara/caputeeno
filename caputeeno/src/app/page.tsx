@@ -1,4 +1,5 @@
 "use client"
+import { DefaultPageLayout } from '@/Components/default-page-layout'
 import { FilterBar } from '@/Components/filter-bar'
 import { ProductsList } from '@/Components/products-list'
 import { styled } from 'styled-components'
@@ -7,22 +8,17 @@ import { styled } from 'styled-components'
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 12px 24px;
-      min-height: 100vh;
-      background-color: var(--bg-primary);
-
-      @media(min-width: ${props=> props.theme.defaultBreakPoint}){
-        padding: 34px 160px;
-      }
+      
     `
 export default function Home() {
   return (
 
-
-    <PageWrapper>
-      <FilterBar />
-      <ProductsList />
-    </PageWrapper>
+    <DefaultPageLayout>
+      <PageWrapper>
+        <FilterBar />
+        <ProductsList />
+      </PageWrapper>
+    </DefaultPageLayout>
     
   )
 }

@@ -1,41 +1,14 @@
 import { ProductsFetchResponse } from "@/types/products-response";
 import { useQuery } from "@tanstack/react-query";
 import axios, { AxiosPromise } from "axios";
-import { useFilter } from "./useFilter";
+import {  mountQuery } from "@/utils/graphql-filters";
 import { useDeferredValue } from "react";
-import { FilterType } from "@/types/filter-typer";
-import { PriorityTypes } from "@/types/priority-types";
-import { getFieldByPriority } from "@/utils/get-field";
-import { getCategoryByType } from "@/utils/get-category";
+import { useFilter } from "./useFilter";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
 const fetcher = (query: string): AxiosPromise<ProductsFetchResponse> => {
-  return axios.post("http://localhost:3333",{ query })
-}
-
-const mountQuery = (type: FilterType, priority: PriorityTypes) => {
-    if(type === FilterType.ALL && priority === PriorityTypes.POPULARITY) return `query {
-        allProducts(sortField: "sales", sortOrder: "DSC") {
-          id
-          name
-          price_in_cents
-          image_url
-        }
-      }
-    `
-    const sortSettings = getFieldByPriority(priority)
-    const categoryFilter = getCategoryByType(type)
-    return `
-    query {
-        allProducts(sortField: "${sortSettings.field}", sortOrder: "${sortSettings.order}", ${categoryFilter ? `filter: { category: "${categoryFilter}"}`: ''}) {
-          id
-          name
-          price_in_cents
-          image_url
-          category
-        }
-      }
-    `
+  return axios.post(API_URL,{ query })
 }
 
 export function useProducts(){
@@ -44,7 +17,8 @@ export function useProducts(){
     const query = mountQuery(type, priority)
     const { data } = useQuery({
       queryFn: () => fetcher(query),
-      queryKey: ['products', type, priority]
+      queryKey: ['products', type, priority],
+      staleTime: 1000 * 60 * 1
     })
 
     const products =  data?.data?.data?.allProducts
