@@ -6,8 +6,6 @@ Welcome! This respostitory contains my solution for [Rocketseat´s](https://www.
 
 # 🧠 About
 
-The goal with this project is to help other who are searching for an opportunity as Frontend Developer, through the tutorial that i made on Youtube, i wish to help you to train your Frontend skills and learning new ways of solving technical challenges.
-
 The challenge is to implement an e-commerce for the sale of mugs and t-shirts that should have the following functionalities:
 
 - [x] Product catalog with pagination
